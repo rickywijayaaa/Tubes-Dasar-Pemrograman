@@ -60,3 +60,10 @@ def appendArr(arr : list,element):
             newArr[i] = arr[i]
         
     return newArr
+
+def my_append(Arr, item):
+    """
+    Add the given item to the end of the list.
+    """
+    Arr += [item]
+    return Arr
