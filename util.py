@@ -67,3 +67,33 @@ def my_append(Arr, item):
     """
     Arr += [item]
     return Arr
+
+def format_rupiah(integer):
+    string = str(integer)[::-1]
+    digit_count = Length(string)
+    result = ''
+    for i in range(digit_count):
+        result = string[i] + result
+        if (i + 1) % 3 == 0 and i != digit_count - 1:
+            result = '.' + result
+    result = 'Rp ' + result
+    return result
+
+def sort_by_frequency(Arr):
+    jumlah_kemunculan = []
+    for i in range(Length(Arr)):
+        count = 0
+        for j in range(Length(Arr)):
+            if Arr[i] == Arr[j]:
+                count += 1
+        jumlah_kemunculan.append(count) #append nya bermasalah
+    for i in range(len(jumlah_kemunculan)):
+        for j in range(i+1, Length(jumlah_kemunculan)):
+            if jumlah_kemunculan[i] < jumlah_kemunculan[j]:
+                jumlah_kemunculan[i], jumlah_kemunculan[j] = jumlah_kemunculan[j], jumlah_kemunculan[i]
+                Arr[i], Arr[j] = Arr[j], Arr[i]
+            elif jumlah_kemunculan[i] == jumlah_kemunculan[j] and Arr[i] > Arr[j]:
+                jumlah_kemunculan[i], jumlah_kemunculan[j] = jumlah_kemunculan[j], jumlah_kemunculan[i]
+                Arr[i], Arr[j] = Arr[j], Arr[i]
+
+    return Arr

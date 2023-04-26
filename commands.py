@@ -290,7 +290,90 @@ def batchkumpul():
             elif (bahan[i][0] == "air"):
                 bahan[i][2] += sum_air
         return None
-    
+def laporanjin ():
+    if currentusers[2] != "bandung_bondowoso":
+        print("Laporan jin hanya dapat diakses oleh bandung bondowoso")
+        return None
+    total_jin = 0
+    total_jin_pengumpul = 0
+    total_jin_pembangun = 0
+    sisa_pasir = int(bahan[0][2])
+    sisa_air = int(bahan[1][2])
+    sisa_batu = int(bahan[2][2])
+    for i in range(Length(users)):
+        if users[i][2] == "jin_pembangun":
+            total_jin += 1
+            total_jin_pembangun += 1
+        elif users[i][2] == "jin_pengumpul":
+            total_jin += 1
+            total_jin_pengumpul += 1
+        else:
+            total_jin += 0
+    jin_pembangun = []
+    for i in range(Length(candi)):
+        jin_pembangun.append(candi[i][1])
+    sort_by_frequency(jin_pembangun)
+    jin_terajin = jin_pembangun[0]
+    jin_termalas = jin_pembangun[Length(jin_pembangun)-1]
+    print("Total Jin: ", total_jin)
+    print("Total Jin Pengumpul: ", total_jin_pengumpul)
+    print("Total Jin Pembangun: ", total_jin_pembangun)
+    if total_jin_pembangun == 0 :
+        print("Jin Terajin: - ")
+        print("Jin Termalas: - ")
+    else:
+        print("Jin Terajin: ", jin_terajin)
+        print("Jin Termalas: ", jin_termalas)
+    print(f"Jumlah Pasir: {sisa_pasir} unit")
+    print(f"Jumlah Air: {sisa_air} unit")
+    print(f"Jumlah Batu: {sisa_batu} unit")
+
+def laporancandi():
+    if currentusers[2] != "bandung_bondowoso":
+        print("Laporan candi hanya dapat diakses oleh bandung bondowoso")
+        return None
+    total_candi = Length(candi)
+    total_pasir = 0
+    total_batu = 0
+    total_air = 0
+    harga_candi = [0 for i in range(Length(candi))]
+    max_harga = harga_candi[0]
+    min_harga = harga_candi[0]
+    idx_max = 0
+    idx_min = 0
+    for i in range(Length(candi)):
+        total_pasir += int(candi[i][2])
+        total_batu += int(candi[i][3])
+        total_air += int(candi[i][4])
+    for i in range(Length(candi)):
+            harga_candi[i] = 10000*int(candi[i][2]) + 15000*int(candi[i][3]) + 7500*int(candi[i][4])
+    for i in range(Length(candi)):
+        if harga_candi[i] >= max_harga:
+            max_harga = harga_candi[i]
+            idx_max = i + 1
+        if i == 0:
+            min_harga = harga_candi[i]
+            idx_min = i + 1
+        else:
+            if harga_candi[i] <= min_harga:
+                min_harga = harga_candi[i]
+                idx_min = i + 1
+    rupiah_max = format_rupiah(max_harga)
+    rupiah_min = format_rupiah(min_harga)
+    print("Total Candi: ", total_candi)
+    if total_candi == 0:
+        print("Total Pasir yang digunakan : 0 ")
+        print("Total Batu yang digunakan : 0 ")
+        print("Total Air yang digunakan : 0 ")
+        print("ID Candi Termahal: - ")
+        print("ID Candi Termurah: - ")
+    else:
+        print("Total Pasir yang digunakan: ", total_pasir )
+        print("Total Batu yang digunakan: ", total_batu)
+        print("Total Air yang digunakan: ", total_air)
+        print(f"ID Candi Termahal: {idx_max} ({rupiah_max}) ")
+        print(f"ID Candi Termurah: {idx_min} ({rupiah_min}) ")
+
 def batchbangun():
     if currentusers[2] != "bandung_bondowoso":
         print("Hanya dapat diakses oleh bandung bondowoso")
