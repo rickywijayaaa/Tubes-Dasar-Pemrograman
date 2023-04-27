@@ -83,7 +83,7 @@ def password(users, uname, jenis_jin):
         password(users, uname, jenis_jin) # Rekurens
     else: # Telah memenuhi syarat karakter
             newusers = [uname,pw,jenis_jin] 
-            users.append(newusers)
+            my_append(users,newusers)
             print("\nMengumpulkan sesajen...")
             print("Menyerahkan sesajen...")
             print("Membacakan mantra...")
@@ -138,7 +138,7 @@ def ubah ():
                     print("Jin tidak jadi diubah")
                     break
                 else :
-                    print("input invalid (Y/N)")  
+                    print("Jin tidak jadi diubah")  
                     break              
             elif (users[i][2]== "jin_pembangun"):
                 print("")
@@ -152,7 +152,7 @@ def ubah ():
                     print ( "Jin tidak jadi diubah")
                     break
                 else :
-                    print("input invalid (Y/N)")
+                    print("Jin tidak jadi diubah")
                     break
             else:
                 print("id terdaftar namun bukan jin pengumpul maupun pembangun")
@@ -196,6 +196,9 @@ def yn_hilangkanjin (uname, candi, users):
     else: # Kreativitas 2
         print('Masukkan tidak sesuai dengan pilihan. Silakan masukkan kembali dengan pilihan masukkan "Y" atau "N"!')
         yn_hilangkanjin(uname, candi, users)
+
+
+
 
 candi_sisa = [100]
 def bangun(candi):
@@ -331,66 +334,43 @@ def batchbangun():
 
 
 
-# def laporanjin ():
-#     if currentusers[2] != "bandung_bondowoso":
-#         print("Laporan jin hanya dapat diakses oleh bandung bondowoso")
-#         return None
-#     total_jin = 0
-#     total_jin_pengumpul = 0
-#     total_jin_pembangun = 0
-#     sisa_pasir = int(bahan[1][2])
-#     sisa_air = int(bahan[2][2])
-#     sisa_batu = int(bahan[3][2])
-#     for i in range(Length(users)):
-#         if users[i][2] == "jin_pembangun":
-#             total_jin += 1
-#             total_jin_pembangun += 1
-#         elif users[i][2] == "jin_pengumpul":
-#             total_jin += 1
-#             total_jin_pengumpul += 1
-#         else:
-#             total_jin += 0
-#     list_jin_pembangun_candi = []
-#     for i in range(Length(candi)):
-#         jin = candi[i][1]
-#         appendArr(list_jin_pembangun_candi, jin)
-#     list_jin_terurut = sort_by_frequency(list_jin_pembangun_candi)
-#     nama_jin_terurut = []
-#     for i in range(Length(list_jin_terurut)-1):
-#         if list_jin_terurut[i] != list_jin_terurut[i+1]:
-#             appendArr(nama_jin_terurut, list_jin_terurut[i])
-#     appendArr(nama_jin_terurut, list_jin_terurut[Length(list_jin_terurut)-1])
-#     freq_found = countFrequency(nama_jin_terurut, list_jin_terurut )
-#     jin_terajin = list_jin_terurut[0]
-#     jin_termalas = list_jin_terurut[Length(list_jin_terurut)]
-#     for i in range(Length(freq_found)-1):
-#         if freq_found[i] == freq_found[i+1]:
-#             if nama_jin_terurut[i] <= nama_jin_terurut[i+1]:
-#                 jin_terajin = nama_jin_terurut[i]
-#             else:
-#                 jin_terajin = nama_jin_terurut[i+1]
-#         else:
-#             break
-#     for i in range(len(freq_found)-1, 0, -1):
-#         if freq_found[i] == freq_found[i-1]:
-#             if nama_jin_terurut[i] >= nama_jin_terurut[i-1]:
-#                 jin_termalas = nama_jin_terurut[i]
-#             else:
-#                 jin_termalas = nama_jin_terurut[i-1]
-#         else:
-#             break      
-#     print("Total Jin: ", total_jin)
-#     print("Total Jin Pengumpul: ", total_jin_pengumpul)
-#     print("Total Jin Pembangun: ", total_jin_pembangun)
-#     if list_jin_pembangun_candi == []:
-#         print("Jin Terajin: - ")
-#         print("Jin Termalas: - ")
-#     else:
-#         print("Jin Terajin: ", jin_terajin)
-#         print("Jin Termalas: ", jin_termalas)
-#     print(f"Jumlah Pasir: {sisa_pasir} unit")
-#     print(f"Jumlah Air: {sisa_air} unit")
-#     print(f"Jumlah Batu: {sisa_batu} unit")
+def laporanjin ():
+    if currentusers[2] != "bandung_bondowoso":
+        print("Laporan jin hanya dapat diakses oleh bandung bondowoso")
+        return None
+    total_jin = 0
+    total_jin_pengumpul = 0
+    total_jin_pembangun = 0
+    sisa_pasir = int(bahan[0][2])
+    sisa_air = int(bahan[1][2])
+    sisa_batu = int(bahan[2][2])
+    for i in range(Length(users)):
+        if users[i][2] == "jin_pembangun":
+            total_jin += 1
+            total_jin_pembangun += 1
+        elif users[i][2] == "jin_pengumpul":
+            total_jin += 1
+            total_jin_pengumpul += 1
+        else:
+            total_jin += 0
+    jin_pembangun = []
+    for i in range(Length(candi)):
+        jin_pembangun.append(candi[i][1])
+    sort_by_frequency(jin_pembangun)
+    jin_terajin = jin_pembangun[0]
+    jin_termalas = jin_pembangun[Length(jin_pembangun)-1]
+    print("Total Jin: ", total_jin)
+    print("Total Jin Pengumpul: ", total_jin_pengumpul)
+    print("Total Jin Pembangun: ", total_jin_pembangun)
+    if total_jin_pembangun == 0 :
+        print("Jin Terajin: - ")
+        print("Jin Termalas: - ")
+    else:
+        print("Jin Terajin: ", jin_terajin)
+        print("Jin Termalas: ", jin_termalas)
+    print(f"Jumlah Pasir: {sisa_pasir} unit")
+    print(f"Jumlah Air: {sisa_air} unit")
+    print(f"Jumlah Batu: {sisa_batu} unit")
 
 def laporancandi():
     if currentusers[2] != "bandung_bondowoso":
@@ -422,8 +402,8 @@ def laporancandi():
             if harga_candi[i] <= min_harga:
                 min_harga = harga_candi[i]
                 idx_min = i + 1
-    rupiah_max = util.format_rupiah(max_harga)
-    rupiah_min = util.format_rupiah(min_harga)
+    rupiah_max = format_rupiah(max_harga)
+    rupiah_min = format_rupiah(min_harga)
     print("Total Candi: ", total_candi)
     if total_candi == 0:
         print("Total Pasir yang digunakan : 0 ")
@@ -437,6 +417,7 @@ def laporancandi():
         print("Total Air yang digunakan: ", total_air)
         print(f"ID Candi Termahal: {idx_max} ({rupiah_max}) ")
         print(f"ID Candi Termurah: {idx_min} ({rupiah_min}) ")
+
 
 def ayamberkokok ():
     if currentusers[2] == 'roro_jonggrang' :
@@ -454,3 +435,84 @@ def ayamberkokok ():
 
     else :
         print("Hanya roro jonggrang yang dapat mengakses")
+
+
+def hancurkan_candi():
+    if currentusers[2] == "roro_jonggrang" :
+        id = int(input("Masukkan ID candi: "))
+        muncul = False
+        for i in range (Length(candi)):
+            if id != candi[i][0]:
+                continue
+            else:
+                muncul = True
+                no = i
+                break 
+
+        if muncul == False:
+            print("Tidak ada candi dengan ID tersebut.")
+        else:
+            confirm = input(f"Apakah anda yakin ingin menghancurkan candi ID: {id} (Y/N)? ")
+
+            if confirm == "Y" or confirm == "y":
+                for i in range (5):
+                    candi[no][i] = None
+                print("Candi telah berhasil dihancurkan.")
+            elif confirm == "n" or confirm == "N":       
+                print("Batal menghancurkan candi")
+
+    else:
+        print("Tidak dapat diakses")
+
+
+def save ():
+    dir = input("Masukkan nama folder :")
+
+
+    path = os.path.join(root)
+    path = os.path.join(path,"save")
+    path = os.path.join(path,dir)
+    if not(os.path.isdir(path)):
+        print("Saving...")
+        os.mkdir(path)
+    users2 =[]
+    candi2= []
+    bahan2=[]
+
+    for i in range(Length(candi)):
+        candi[i][0] = str(candi[i][0])
+    for i in range(Length(bahan)):
+        bahan[i][2] = str(bahan[i][2])
+
+    for i in range (Length(users)):
+        my_append(users2,util.merge_n (users[i],3,";"))
+
+    for i in range (Length(candi)):
+        my_append(candi2,util.merge_n (candi[i],5,";"))
+    for i in range (Length(bahan)):
+        my_append(bahan2,util.merge_n (bahan[i],3,";"))
+
+    print(util.merge_n (users[i],3,";"))
+    text = ""
+    textcandi =""
+    textbahan = ""
+    for i in range (Length(users2)):
+        text += users2[i] + "\n"
+    for i in range (Length(candi2)):
+        textcandi += candi2[i] + "\n"
+    for i in range (Length(bahan2)):
+        textbahan += bahan2[i] + "\n"
+
+
+    with open (os.path.join(path,'user.csv'),'w') as f :
+        f.write (text)
+        
+
+    with open (os.path.join(path,'candi.csv'),'w') as f :
+        f.write (textcandi)
+
+
+    with open (os.path.join(path,'bahan_bangunan.csv'),'w') as f :
+        f.write (textbahan)
+
+    print(f"Berhasil menyimpan data di folder {path}")

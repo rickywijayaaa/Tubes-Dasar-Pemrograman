@@ -54,6 +54,15 @@ while True:
         print(candi)
     elif(menu== "laporancandi"):
         laporancandi()
+    elif (menu == "hancurkancandi"):
+        hancurkan_candi()
+        print(candi)
+    elif (menu =="save"):
+        save()
+    elif (menu == "laporanjin"):
+        laporanjin()
+    elif (menu == "laporancandi"):
+        laporancandi()
     else :
         break
 
