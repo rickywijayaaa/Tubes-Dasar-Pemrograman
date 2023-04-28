@@ -5,14 +5,15 @@ import os
 import random
 
 
-#Fungsi len
+# FUNGSI BANTUAN 
+# Fungsi Length : Menghitung panjang dari karakter
 def Length (object) -> int :
     count = 0
     for i in object :
         count += 1
     return count    
 
-# Fungsi Absolut
+# Fungsi Absolut : Menghitung selisih dari kedua variabel 
 def Abs (a,b):
     c = a - b
     if c < 0 :
@@ -22,7 +23,10 @@ def Abs (a,b):
 currentusers = [-1,-1,-1]
 import random
 
-
+# F01 - Login
+# Melakukan login ke dalam sistem dengan mengakses username dan password yang terdaftar dalam users
+# Apabila username yang dimasukkan user tidak terdaftar dan password yang dimasukkan tidak sesuai, akan dikeluarkan pesan kesalahan sesuai permasalahannya. 
+# Pesan kesalahan juga akan dikeluarkan apabila username telah terdeteksi login sebelumnya dan belum melakukan logout
 def login():
     if currentusers[0] != -1:
         print("anda sudah login")
@@ -90,6 +94,7 @@ def password(users, uname, jenis_jin):
             print(f"\nJin {newusers[0]} berhasil dipanggil!")
     return users
 
+
 def main_summonjin (users):
     print("Jenis jin yang dapat dipanggil: ")
     print(" (1) Pengumpul - Bertugas mengumpulkan bahan bangunan")
@@ -116,6 +121,45 @@ def summon (users):
         print(f'\nTidak ada jenis jin bernomor “{jenis_jin}”!')
         summon (users)
     return users
+
+
+def hilangkanJin (users, candi):
+    if currentusers[2] != "bandung_bondowoso":
+        print("Hanya dapat diakses oleh bandung bondowoso")
+        return None    
+    check = 0
+    uname = input("Masukkan username jin : ")
+    for i in range(Length(users)):
+        if (users[i][0] == uname):
+                check += 1
+    if check != 0:
+            yn_hilangkanjin(uname, candi, users)
+    else: # check == 0 
+        print('\nTidak ada jin dengan username tersebut.')
+       # KEMBALI KE COMMAND
+    return users
+
+def yn_hilangkanjin (uname, candi, users):
+    check_yn = input(f"Apakah anda yakin ingin menghapus jin dengan username {uname} (Y/N)? ")
+    if (check_yn == "Y"):
+        for i in range (Length(candi)): # Candi tetap terhitung 100 
+            if candi[i][1] == uname: 
+                candi[i]= None
+            else:
+                continue
+        for i in range (Length(users)):
+            if users[i][0] == uname:
+                users[i] = None
+            else:
+                continue
+        print("\nJin telah berhasil dihapus dari alam gaib.")
+    elif (check_yn == "N"): # Kreativitas 1
+        print("\nPenghapusan jin akan dibatalkan. Kamu akan dikembalikan ke pemilihan daftar command.")
+        # KEMBALI KE COMMAND     
+    else: # Kreativitas 2
+        print('Masukkan tidak sesuai dengan pilihan. Silakan masukkan kembali dengan pilihan masukkan "Y" atau "N"!')
+        yn_hilangkanjin(uname, candi, users)
+
 
 def ubah ():
     if currentusers[2] != "bandung_bondowoso":
@@ -158,46 +202,6 @@ def ubah ():
                 print("id terdaftar namun bukan jin pengumpul maupun pembangun")
     if (idx == 0): # Jika username jin tidak tersedia
         print("Tidak ada jin dengan username tersebut.")
-
-
-def hilangkanJin (users, candi):
-    if currentusers[2] != "bandung_bondowoso":
-        print("Hanya dapat diakses oleh bandung bondowoso")
-        return None    
-    check = 0
-    uname = input("Masukkan username jin : ")
-    for i in range(Length(users)):
-        if (users[i][0] == uname):
-                check += 1
-    if check != 0:
-            yn_hilangkanjin(uname, candi, users)
-    else: # check == 0 
-        print('\nTidak ada jin dengan username tersebut.')
-       # KEMBALI KE COMMAND
-    return users
-
-def yn_hilangkanjin (uname, candi, users):
-    check_yn = input(f"Apakah anda yakin ingin menghapus jin dengan username {uname} (Y/N)? ")
-    if (check_yn == "Y"):
-        for i in range (Length(candi)): # Candi tetap terhitung 100 
-            if candi[i][1] == uname: 
-                candi[i]= None
-            else:
-                continue
-        for i in range (Length(users)):
-            if users[i][0] == uname:
-                users[i] = None
-            else:
-                continue
-        print("\nJin telah berhasil dihapus dari alam gaib.")
-    elif (check_yn == "N"): # Kreativitas 1
-        print("\nPenghapusan jin akan dibatalkan. Kamu akan dikembalikan ke pemilihan daftar command.")
-        # KEMBALI KE COMMAND     
-    else: # Kreativitas 2
-        print('Masukkan tidak sesuai dengan pilihan. Silakan masukkan kembali dengan pilihan masukkan "Y" atau "N"!')
-        yn_hilangkanjin(uname, candi, users)
-
-
 
 
 candi_sisa = [100]
