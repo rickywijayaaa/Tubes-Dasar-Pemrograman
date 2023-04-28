@@ -86,12 +86,29 @@ def logout():
 # Fungsi ini dapat memasukkan username jin dan password dengan panjang 5-25 karakter
 # Jin yang telah di-summon dapat melakukan login untuk melakukan tugasnya
 
+# Fungsi Main untuk Summon Jin
+def main_summonjin (users):
+    # Akses summon jin hanya terdapat pada Bandung Bondowoso
+    # Apabila user yang terdeteksi login bukan Bandung
+    if currentusers[2] != "bandung_bondowoso":
+        print("Program Summon Jin hanya dapat diakses oleh Bandung Bondowoso")
+        return None
+    # Apabila user yang terdeteksi login adalah Bandung
+    print("Jenis jin yang dapat dipanggil: ")
+    print(" (1) Pengumpul - Bertugas mengumpulkan bahan bangunan")
+    print(" (2) Pembangun - Bertugas membangun candi")
+    
+    # Rekurens Fungsi: Memilih jenis jin yang dipanggil
+    summon (users) 
+
+    return users
+
 # Fungsi 1 untuk Summon Jin : Memasukkan username jin yang dipanggil
 # Memasukkan username dari jin yang akan di-summon dan check apakah ada nama yang sama pada users yang ada dalam program
 # Apabila terdapat nama yang sama maka akan dipanggil kembali function uname_summonjin
 # Apabila tidak tersedia nama yang sama maka akan diproses function password
 def uname_summonjin(users, jenis_jin):
-    # Counter untuk check username sudah ada dalam users atau tidak
+    # Inisialisasi counter untuk check username sudah ada dalam users atau tidak
     check = 0
     
     # Input pertama username 
@@ -115,88 +132,111 @@ def uname_summonjin(users, jenis_jin):
 # Apabila memenuhi maka akan diproses pemanggilan jin
 # Apabila tidak memenuhi maka akan dipanggil kembali function password
 def password(users, uname, jenis_jin):
+    # Inisialisasi users yang baru di-summon pada program ini
     newusers =[]
-    # Input pertama password
+    # Program input password
     pw = input("Masukkan password jin: ")
-    # Percabangan pemenuhan 5 sampai 25 karakter dalam password
-    if Length(pw) < 5 or Length(pw) > 25: # Belum memenuhi syarat karakter
+    # Percabangan pemenuhan syarat password
+    # Belum memenuhi syarat panjang karakter
+    if Length(pw) < 5 or Length(pw) > 25: 
         print("\nPassword panjangnya harus 5-25 karakter!\n")
-        password(users, uname, jenis_jin) # Rekurens
+        password(users, uname, jenis_jin) # Rekurens Fungsi Ini Kembali
     else: # Telah memenuhi syarat karakter
+            # Inisialisasi array users yang akan di-summon
             newusers = [uname,pw,jenis_jin] 
-            my_append(users,newusers)
+            my_append(users,newusers) # Pemanggilan Fungsi Bantuan
             print("\nMengumpulkan sesajen...")
             print("Menyerahkan sesajen...")
             print("Membacakan mantra...")
             print(f"\nJin {newusers[0]} berhasil dipanggil!")
+            # Jin berhasil di-summon
     return users
-
-
-def main_summonjin (users):
-    print("Jenis jin yang dapat dipanggil: ")
-    print(" (1) Pengumpul - Bertugas mengumpulkan bahan bangunan")
-    print(" (2) Pembangun - Bertugas membangun candi")
-    
-    summon (users)
-
-    return users
-
+# Fungsi 3 untuk Summon Jin : Memilih 2 jenis jin dan memproses pilihan sesuai dengan input user
 def summon (users):
+    # Menerima masukan user terkait pilihan jenis jin, yaitu jin pembangun atau jin pengumpul
     jenis_jin = int(input("\nMasukkan nomor jenis yang ingin dipanggil: "))
-
+    
+    # Percabangan pemilihan jenis jin
     if (jenis_jin == 1):
         print('\nMemilih jin "Pengumpul".')
         jenis_jin = "jin_pengumpul"
+        # Rekurens Fungsi Lain: Memasukkan Username
         uname_summonjin(users, jenis_jin)
-
     elif (jenis_jin == 2):
         print('\nMemilih jin "Pembangun".')
         jenis_jin = "jin_pembangun"
+        # Rekurens Fungsi Lain: Memasukkan Username
         uname_summonjin(users, jenis_jin)
-
-    else:
+    else: # Masukan user merupakan bilangan tipe integer selain 1 dan 2
         print(f'\nTidak ada jenis jin bernomor “{jenis_jin}”!')
+        # Rekurens Fungsi Ini Kembali
         summon (users)
     return users
 
-# F04 - Hilangkan Jin
 
+# F04 - Hilangkan Jin
+# Menghilangkan jin dengan candi yang telah dibuat dengan memasukkan username jin yang ingin dihapus 
+# Kemudian, cek ada atau tidaknya username jin yang dimasukkan
+# Fungsi main untuk Hilangkan Jin
 def hilangkanJin (users, candi):
+    # Akses hilangkan jin hanya terdapat pada Bandung Bondowoso
+    # Apabila user yang terdeteksi login bukan Bandung
     if currentusers[2] != "bandung_bondowoso":
-        print("Hanya dapat diakses oleh bandung bondowoso")
-        return None    
+        print("Program Hilangkan Jin hanya dapat diakses oleh Bandung Bondowoso")
+        return None  
+    # Inisialisasi counter untuk cek apakah terdapat username yang diinput user dalam users dan candi
     check = 0
+    
+    # Input username yang akan dihilangkan dari users dan candi
     uname = input("Masukkan username jin : ")
+    
+    # Perulangan untuk counter check
     for i in range(Length(users)):
         if (users[i][0] == uname):
                 check += 1
+    # Terdapat username yang diinput dalam users dan candi            
     if check != 0:
+            # Rekurens Fungsi: Pertanyaan yakin atau tidaknya menghilangkan jin dan candi yang dibuatnya
             yn_hilangkanjin(uname, candi, users)
-    else: # check == 0 
+    else: # Tidak terdapat username yang diinput dalam users dan candi
         print('\nTidak ada jin dengan username tersebut.')
-       # KEMBALI KE COMMAND
+       # Kembali ke Command
     return users
 
+# Fungsi 1 untuk Hilangkan Jin
+# Menerima jawaban Y atau N terhadap pertanyaan yakin atau tidaknya menghapus jin dan candi yang dibuatnya 
+# Apabila Y maka jin dihilangkan dan candi yang dibuat akan dihilangkan juga
+# Apabila N maka penghapusan jin dibatalkan
 def yn_hilangkanjin (uname, candi, users):
+    # Input user terkait yakin atau tidaknya menjalankan program penghapusan jin dan candi yang dibuatnya
     check_yn = input(f"Apakah anda yakin ingin menghapus jin dengan username {uname} (Y/N)? ")
+    # Percabangan berdasarkan input users pada variabel check_yn
     if (check_yn == "Y"):
+        # Penghapusan pada matriks candi
         for i in range (Length(candi)): # Candi tetap terhitung 100 
             if candi[i][1] == uname: 
                 candi[i]= None
+                # Penghapusan candi yang dibuat username yang diinput user pada matriks candi
             else:
                 continue
+        # Penghapusan pada matriks users
         for i in range (Length(users)):
             if users[i][0] == uname:
                 users[i] = None
-            else:
+                # Penghapusan username yang diinput user pada matriks users
+            else: # Melanjutkan pada i berikutnya
                 continue
         print("\nJin telah berhasil dihapus dari alam gaib.")
-    elif (check_yn == "N"): # Kreativitas 1
+        # Kembali ke command
+    # Tidak ada spesifikasi dalam output dari input “N” sehingga diberikan pesan pembatalan penghilangan jin
+    # Program dihentikan atau dikembalikan ke command
+    elif (check_yn == "N"):
         print("\nPenghapusan jin akan dibatalkan. Kamu akan dikembalikan ke pemilihan daftar command.")
-        # KEMBALI KE COMMAND     
-    else: # Kreativitas 2
+    # check_yn != “N” or check_yn != “Y”    
+    else: 
         print('Masukkan tidak sesuai dengan pilihan. Silakan masukkan kembali dengan pilihan masukkan "Y" atau "N"!')
-        yn_hilangkanjin(uname, candi, users)
+        yn_hilangkanjin(uname, candi, users) # Rekurens Fungsi Ini Kembali
+    return (users, candi)
 
 # F05 : Ubah Tipe Jin
 def ubah ():
