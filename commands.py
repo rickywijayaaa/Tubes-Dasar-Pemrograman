@@ -95,7 +95,7 @@ def password(users, uname, jenis_jin):
     return users
 
 
-def main_summonjin (users):
+def main_summonjin(users):
     print("Jenis jin yang dapat dipanggil: ")
     print(" (1) Pengumpul - Bertugas mengumpulkan bahan bangunan")
     print(" (2) Pembangun - Bertugas membangun candi")
@@ -104,7 +104,7 @@ def main_summonjin (users):
 
     return users
 
-def summon (users):
+def summon(users):
     jenis_jin = int(input("\nMasukkan nomor jenis yang ingin dipanggil: "))
 
     if (jenis_jin == 1):
@@ -161,7 +161,7 @@ def yn_hilangkanjin (uname, candi, users):
         yn_hilangkanjin(uname, candi, users)
 
 
-def ubah ():
+def ubah():
     if currentusers[2] != "bandung_bondowoso":
         print("Hanya dapat diakses oleh bandung bondowoso")
         return None
@@ -248,7 +248,7 @@ def bangun(candi):
                             bahan[i][2] -= air_c
                 return None
 
-def kumpul ():
+def kumpul():
     if currentusers[0] == "bondowoso" or currentusers[0] == "roro" or currentusers[2] != "jin_pengumpul":
         print("hanya jin pengumpul yang dapat melakukan")
         return None
@@ -338,7 +338,7 @@ def batchbangun():
 
 
 
-def laporanjin ():
+def laporanjin():
     if currentusers[2] != "bandung_bondowoso":
         print("Laporan jin hanya dapat diakses oleh bandung bondowoso")
         return None
@@ -469,7 +469,7 @@ def hancurkan_candi():
         print("Tidak dapat diakses")
 
 
-def save ():
+def save():
     dir = input("Masukkan nama folder :")
 
 
@@ -520,3 +520,95 @@ def save ():
         f.write (textbahan)
 
     print(f"Berhasil menyimpan data di folder {path}")
+
+def help():
+    if currentusers[2] == -1:
+        print("Anda belum melakukan login")
+        print("Apakah ada yang bisa dibantu ?")
+        print("=========== HELP ===========")
+        print("1. login")
+        print("   untuk masuk menggunakan akun")
+        print("0. exit")
+        print("   untuk keluar dari program dan kembali ke terminal")
+    elif currentusers[2] == "bandung_bondowoso":
+        print("""Apakah ada yang bisa dibantu ?
+=========== HELP ===========
+        """)
+        print("""1. logout
+   untuk keluar dari akun yang digunakan sekarang
+2. summonjin
+   untuk memanggil jin dari dunia lain
+3. hapusjin
+   untuk menghapus jin yang sudah dipanggil
+4. ubahjin
+   untuk mengubah tipe jin
+5. batchkumpul
+   untuk mempekerjakan jin pengumpul
+6. batchbangun
+   untuk mempekerjakan jin pembangun
+7. laporanjin
+   untuk melihat laporan yang berisi total jin, total jin pengumpul, total jin pembangun,
+   jin terajin, jin termalas, jumlah pasir yang tersedia, jumlah air yang tersedia, dan jumlah batu yang tersedia
+8. laporancandi
+   untuk melihat laporan yang berisi total candi, total pasir yang digunakan, total batu yang digunakan,
+   total air yang digunakan, ID candi termahal, dan ID candi termurah
+0. exit
+   untuk keluar dari program dan kembali ke terminal
+        """)
+    elif currentusers[2] == "jin_pengumpul":
+        print("""Apakah ada yang bisa dibantu ?
+=========== HELP ===========
+        """)
+        print("""1. logout
+   untuk keluar dari akun yang digunakan sekarang
+2. kumpul
+   untuk mengumpulkan bahan yang dibutuhkan
+0. exit
+   untuk keluar dari program dan kembali ke terminal
+        """)
+    elif currentusers[2] == "jin_pembangun":
+        print("""Apakah ada yang bisa dibantu ?
+=========== HELP ===========
+        """)
+        print("""1. logout
+   untuk keluar dari akun yang digunakan sekarang
+2. bangun
+   untuk membangun candi
+0. exit
+   untuk keluar dari program dan kembali ke terminal
+        """)
+    else: #roro_jonggrang
+        print("""Apakah ada yang bisa dibantu ?
+=========== HELP ===========
+        """)
+        print("""1. logout
+   untuk keluar dari akun yang digunakan sekarang
+2. hancurkancandi
+   untuk menghancurkan candi yang sudah dibuat
+3. ayamberkokok
+   untuk menyelesaikan permainan 
+0. exit
+   untuk keluar dari program dan kembali ke terminal
+        """)
+
+def exit():
+    if currentusers[0] != -1:
+        input_benar = False
+        while(input_benar == False):
+            print("Apakah Anda mau melakukan penyimpanan file yang sudah diubah? (y/n)")
+            perintah = input()
+            if perintah == "y" or perintah == "Y":
+                save()
+                input_benar = True
+            elif perintah == "n" or perintah == "N":
+                print("""Terima Kasih
+Sampai Jumpa
+=========== EXIT ===========""")
+                input_benar = True
+            else:
+                input_benar = False
+        
+        if input_benar == True:
+            return False
+    else:
+        return False

@@ -62,6 +62,11 @@ while True:
         laporancandi()
     elif (masukkan == "status"):
         print (currentusers)
+    elif (masukkan == "help"):
+        help()
+    elif (masukkan == "exit"):
+        exit()
+        break
     else :
         break
 
