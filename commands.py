@@ -25,38 +25,61 @@ import random
 
 # F01 - Login
 # Melakukan login ke dalam sistem dengan mengakses username dan password yang terdaftar dalam users
-# Apabila username yang dimasukkan user tidak terdaftar dan password yang dimasukkan tidak sesuai, akan dikeluarkan pesan kesalahan sesuai permasalahannya. 
+# Apabila username yang dimasukkan user tidak terdaftar dan password yang dimasukkan tidak sesuai, akan dikeluarkan pesan kesalahan sesuai permasalahannya
 # Pesan kesalahan juga akan dikeluarkan apabila username telah terdeteksi login sebelumnya dan belum melakukan logout
+
+# Fungsi Main Login 
 def login():
+    # Menerima input user setelah menu Login
+    uname = input("Username: ")
+    pw = input("Password: ")
+    # User sudah melakukan login sebelumnya
     if currentusers[0] != -1:
-        print("anda sudah login")
+        print("Login gagal!")
+        print(f'Anda telah login dengan username {uname}, silahkan lakukan "logout" sebelum melakukan login kembali.')
         return None
-    username = input("Username: ")
-    password = input("Password: ")
-    for i in range(len(users)):
+    # Pengecekan apakah username serta password yang dimasukkan terdaftar dalam users
+    for i in range(Length(users)):
+        # Apabila username terdaftar pada users
         if (username == users[i][0]):
+            # Apabila password terdaftar pada users
             if (password == users[i][1]):
-                print("")
-                print(f"Selamat datang, {username}!")
+                print(f"\nSelamat datang, {uname}!")
+                print('Masukkan command "help" untuk daftar command yang dapat kamu panggil.')
+                # Perubahan currentusers sebagai tanda terdeteksinya user yang sudah melakukan login
                 currentusers[0] = users[i][0]
                 currentusers[1] = users[i][1]
                 currentusers[2] = users[i][2]
                 return None
-            print("")
-            print("Password salah!")
+            # Password tidak terdaftar dalam users
+            print("\nPassword salah!")
             return None
-    print("user tidak ditemukan")
+    # Username tidak terdaftar dalam users
+    print("\nUser tidak terdaftar")
     return None
 
+# F02 - Logout
+# Melakukan logout ke luar sistem dengan menghilangkan akses dari akun sebelumnya dan dapat melakukan Login kembali ke dalam akun lain sesuai data pada users
+# Pesan kesalahan akan diberikan apabila terdeteksi belum ada akun yang masuk atau melakukan Login
+
+# Fungsi Main Logout
 def logout():
+    # User belum melakukan login sebelumnya
     if currentusers[0] == -1:
-        print("anda belum login")
+        print("Login gagal!")
+        print("Anda belum login, silahkan login terlebih dahulu sebelum melakukan logout")
         return None
+    # User sudah melakukan login sebelumnya
+    # currentusers[0] == -1 
     currentusers[0] = -1
     currentusers[1] = -1
     currentusers[2] = -1
-    print("Log out berhasil, bye!")
+    print("Logout berhasil, sampai jumpa lagi!")
     return None
+    # Keluar dari akun
+
+# F03 - Summon Jin
+# 
 
 # Fungsi untuk memasukkan username jin
 def uname_summonjin(users, jenis_jin):
@@ -122,6 +145,7 @@ def summon (users):
         summon (users)
     return users
 
+# F04 - Hilangkan Jin
 
 def hilangkanJin (users, candi):
     if currentusers[2] != "bandung_bondowoso":
