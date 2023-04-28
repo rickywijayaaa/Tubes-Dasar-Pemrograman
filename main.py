@@ -19,50 +19,49 @@ def Abs (a,b):
     return c
 
 
+
 while True:
-    menu = input("Menu: ")
-    if (menu == "kumpul"):
-        kumpul()
-    elif (menu == "login"):
+    masukkan = input(">>> ")
+    if (masukkan == "login"):
         login()
-    elif (menu == "logout"):
+    elif (masukkan == "logout"):
         logout()
-    elif (menu == "ubah"):
-        ubah()
-    elif (menu == "bahan"):
-        print (bahan)
-    elif (menu == "status"):
-        print (currentusers)
-    elif (menu == "batchkumpul"):
-        batchkumpul()
-        print(bahan)
-    elif (menu == "batchbangun"):
-        batchbangun()
-        print(bahan)
-    elif (menu == "bangun"):
-        bangun(candi)
-        print(bahan)
-        print(candi)
-    elif (menu == "ayamberkokok"):
-        ayamberkokok()
-    elif (menu == "summonjin"):
+    elif (masukkan == "summonjin"):
         main_summonjin(users)
         print(users)
-    elif (menu == "hapusjin"):
+    elif (masukkan == "hapusjin"):
         hilangkanJin(users, candi)
         print(users)
         print(candi)
-    elif(menu== "laporancandi"):
+    elif (masukkan == "ubahjin"):
+        ubah()
+    elif (masukkan == "bangun"):
+        bangun(candi)
+        print(bahan)
+        print(candi)
+    elif (masukkan == "bahan"):
+        print (bahan)
+    elif (masukkan == "batchkumpul"):
+        batchkumpul()
+        print(bahan)
+    elif (masukkan == "batchbangun"):
+        batchbangun()
+        print(bahan)
+    elif (masukkan == "ayamberkokok"):
+        ayamberkokok()
+    elif(masukkan== "laporancandi"):
         laporancandi()
-    elif (menu == "hancurkancandi"):
+    elif (masukkan == "hancurkancandi"):
         hancurkan_candi()
         print(candi)
-    elif (menu =="save"):
+    elif (masukkan =="save"):
         save()
-    elif (menu == "laporanjin"):
+    elif (masukkan == "laporanjin"):
         laporanjin()
-    elif (menu == "laporancandi"):
+    elif (masukkan == "laporancandi"):
         laporancandi()
+    elif (masukkan == "status"):
+        print (currentusers)
     else :
         break
 
