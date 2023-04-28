@@ -20,6 +20,7 @@ def Abs (a,b):
         c * -1
     return c
 
+# Inisalisasi currentusers sebagai indikator user yang telah login
 currentusers = [-1,-1,-1]
 import random
 
@@ -74,32 +75,45 @@ def logout():
     currentusers[0] = -1
     currentusers[1] = -1
     currentusers[2] = -1
-    print("Logout berhasil, sampai jumpa lagi!")
+    print("\nLogout berhasil, sampai jumpa lagi!\n")
     return None
     # Keluar dari akun
 
 # F03 - Summon Jin
-# 
+# Memanggil 2 jenis jin, yaitu jin pengumpul dan jin pembangun
+# Pemanggilan jin hanya dapat dilakukan oleh user Bandung Bondowoso
+# Jumlah maksimal Jin yang dapat di-summon yaitu sebanyak 100 jin
+# Fungsi ini dapat memasukkan username jin dan password dengan panjang 5-25 karakter
+# Jin yang telah di-summon dapat melakukan login untuk melakukan tugasnya
 
-# Fungsi untuk memasukkan username jin
+# Fungsi 1 untuk Summon Jin : Memasukkan username jin yang dipanggil
+# Memasukkan username dari jin yang akan di-summon dan check apakah ada nama yang sama pada users yang ada dalam program
+# Apabila terdapat nama yang sama maka akan dipanggil kembali function uname_summonjin
+# Apabila tidak tersedia nama yang sama maka akan diproses function password
 def uname_summonjin(users, jenis_jin):
-    # Counter untuk check username sudah ada dalam file csv atau tidak
+    # Counter untuk check username sudah ada dalam users atau tidak
     check = 0
+    
     # Input pertama username 
     uname = input("\nMasukkan username jin: ")
+    
     # Perulangan untuk cek apakah ada username yang sama dengan username yang diinput user
     for i in range(Length (users)):
         if (users[i][0] == uname):
                 check += 1
-    # Percabangan apabila terdapat username yang sama
-    if check == 0:
-        password(users, uname, jenis_jin)
-    else: # Rekursif apabila username sama sampai ditemukan username yang tidak sama
+                
+    # Percabangan sesuai dengan ada atau tidaknya username yang sama berdasarkan counter
+    if check == 0: # Tidak ada username yang sama
+        password(users, uname, jenis_jin) # Rekurens Fungsi Lain : Input Password
+    else: # Tidak ada username yang sama
         print(f'\nUsername "{uname}" sudah diambil!')
-        uname_summonjin(users, jenis_jin)
+        uname_summonjin(users, jenis_jin) # Rekurens Fungsi Ini Kembali
     return users
 
-# Fungsi untuk memasukkan password jin setelah didapatkan username yang valid
+# Fungsi 2 untuk Summon Jin : Memasukkan password jin yang dipanggil
+# Memasukkan password yang memenuhi syarat 5 sampai 25 karakter
+# Apabila memenuhi maka akan diproses pemanggilan jin
+# Apabila tidak memenuhi maka akan dipanggil kembali function password
 def password(users, uname, jenis_jin):
     newusers =[]
     # Input pertama password
@@ -184,7 +198,7 @@ def yn_hilangkanjin (uname, candi, users):
         print('Masukkan tidak sesuai dengan pilihan. Silakan masukkan kembali dengan pilihan masukkan "Y" atau "N"!')
         yn_hilangkanjin(uname, candi, users)
 
-
+# F05 : Ubah Tipe Jin
 def ubah ():
     if currentusers[2] != "bandung_bondowoso":
         print("Hanya dapat diakses oleh bandung bondowoso")
