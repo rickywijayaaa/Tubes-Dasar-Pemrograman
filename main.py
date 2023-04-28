@@ -4,7 +4,8 @@ import os
 import random
 from commands import *
 
-#Fungsi len
+# Fungsi Bantuan
+# Fungsi len
 def Length (object) -> int :
     count = 0
     for i in object :
@@ -18,8 +19,7 @@ def Abs (a,b):
         c * -1
     return c
 
-
-
+# Algoritma Program Utama secara Keseluruhan (MAIN)
 while True:
     masukkan = input(">>> ")
     if (masukkan == "login"):
@@ -27,18 +27,31 @@ while True:
     elif (masukkan == "logout"):
         logout()
     elif (masukkan == "summonjin"):
-        main_summonjin(users)
-        print(users)
+        if currentusers[0] == -1:
+            print("Anda terdeteksi tidak login, lakukan login terlebih dahulu sebelum melakukan summon jin")
+        else:
+            if (Length(users) - 2) >= 100:
+                print(
+                    "Jumlah Jin telah maksimal! (100 jin). Bandung tidak dapat men-summon lebih dari itu")
+            else:
+                main_summonjin(users)
     elif (masukkan == "hapusjin"):
-        hilangkanJin(users, candi)
-        print(users)
-        print(candi)
+        if currentusers[0] == -1:
+            print("Anda terdeteksi tidak login, lakukan login terlebih dahulu sebelum melakukan menghapus jin")
+        else:
+            hilangkanJin(users,candi)
     elif (masukkan == "ubahjin"):
-        ubah()
+        if currentusers[0] == -1:
+            print("Anda terdeteksi tidak login, lakukan login terlebih dahulu sebelum melakukan mengubah jin")
+        else:
+            ubah()
     elif (masukkan == "bangun"):
-        bangun(candi)
-        print(bahan)
-        print(candi)
+        if currentusers[0] == -1:
+            print("Anda terdeteksi tidak login, lakukan login terlebih dahulu sebelum melakukan pembangunan candi")
+        else:
+            bangun(candi)
+            print(bahan)
+            print(candi)
     elif (masukkan == "bahan"):
         print (bahan)
     elif (masukkan == "batchkumpul"):
@@ -47,23 +60,18 @@ while True:
     elif (masukkan == "batchbangun"):
         batchbangun()
         print(bahan)
-    elif (masukkan == "ayamberkokok"):
-        ayamberkokok()
-    elif(masukkan== "laporancandi"):
-        laporancandi()
-    elif (masukkan == "hancurkancandi"):
-        hancurkan_candi()
-        print(candi)
-    elif (masukkan =="save"):
-        save()
     elif (masukkan == "laporanjin"):
         laporanjin()
     elif (masukkan == "laporancandi"):
         laporancandi()
+    elif (masukkan == "hancurkancandi"):
+        hancurkan_candi()
+        print(candi)
+    elif (masukkan == "ayamberkokok"):
+        ayamberkokok()
+    elif (masukkan =="save"):
+        save()
     elif (masukkan == "status"):
         print (currentusers)
     else :
         break
-
-
-#print(candi)
