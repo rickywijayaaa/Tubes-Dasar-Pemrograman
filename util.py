@@ -1,6 +1,9 @@
 # Fungsi Bantuan 1 : Menghitung panjang karakter pada suatu tipe data
 def Length (object) -> int :
+    # Inisialisasi counter count
     count = 0
+    
+    # Perulangan dalam object
     for i in object :
         count += 1
     return count 
@@ -9,7 +12,8 @@ def Length (object) -> int :
 def count_sep (s:str, sep:str) -> int :
     # Inisialisasi counter count
     count = 1
-    # Pengulangan counter separator
+    
+    # Perulangan counter separator
     for i in range (Length(s)):
         if s[i] == sep :
             count += 1
@@ -20,13 +24,15 @@ def count_sep (s:str, sep:str) -> int :
 # s adalah string yang akan dipecah
 # sep ada separator atau karakter pemisah
 def split (s:str, sep :str) -> list[str]:
+    # Inisialisasi awal
     item_count = count_sep =(s,sep)
-
     i = 0
     res =["" for i in range (item_count)]
-    for j in range (len(s)):
+    
+    # Perulangan counter separator
+    for j in range (Length(s)):
         if s[j] == sep :
-            i ++ 1
+            i += 1
         elif s[j] != "\n":
             res[i] += s[j]
     return res
@@ -35,19 +41,13 @@ def split (s:str, sep :str) -> list[str]:
 # Menggabungkan suatu list of string
 # menjadi satu string dipisahkan dengan separator
 def merge_n (los:list[str], n : int , sep :str) -> str :
+    # Inisialisasi
     res = los[0]
+    # Perulangan untuk variabel res
     for i in range (1, n):
         res = res + sep + los [i]
     return res
 
-# Fungsi Bantuan 5
-# Menggabungkan suatu list of string menjadi 
-# satu string dipisahkan dengan separator
-def merge_n(los:list[str], n:int, sep:str) -> str :
-    res = los [0]
-    for i in range (1,n):
-        res = res + sep + los[i]
-    return res
 
 # Fungsi Bantuan 
 def hitungJumlah (data:list, index: int, n:int):
@@ -57,10 +57,14 @@ def hitungJumlah (data:list, index: int, n:int):
     
     return jumlah
     
-# Fungsi Bantuan 6
+# Fungsi Bantuan 5
+# Menambahkan elemen baru di akhir array
+# Mengembalikan hasil array baru yang telah ditambahkan
 def appendArr(arr : list,element):
+    # Inisialisasi array baru
     newArr = [0 for i in range(Length(arr) + 1)]
-
+    
+    # Perulangan isi array baru
     for i in range(Length(arr) + 1):
         if(i == Length(arr)):
             newArr[i] = element
@@ -69,13 +73,15 @@ def appendArr(arr : list,element):
         
     return newArr
 
-# Fungsi Bantuan 7
+# Fungsi Bantuan 6
+# Menambahkan elemen baru di akhir array
+# Mengembalikan hasil array baru yang telah ditambahkan
 def my_append(Arr, item):
     
     Arr += [item]
     return Arr
 
-# Fungsi Bantuan 8
+# Fungsi Bantuan 7
 def format_rupiah(integer):
     string = str(integer)[::-1]
     digit_count = Length(string)
@@ -87,7 +93,7 @@ def format_rupiah(integer):
     result = 'Rp ' + result
     return result
 
-# Fungsi Bantuan 9
+# Fungsi Bantuan 8
 def sort_by_frequency(Arr):
     jumlah_kemunculan = []
     for i in range(Length(Arr)):
@@ -96,7 +102,7 @@ def sort_by_frequency(Arr):
             if Arr[i] == Arr[j]:
                 count += 1
         my_append(jumlah_kemunculan,count) 
-    for i in range(len(jumlah_kemunculan)):
+    for i in range(Length(jumlah_kemunculan)):
         for j in range(i+1, Length(jumlah_kemunculan)):
             if jumlah_kemunculan[i] < jumlah_kemunculan[j]:
                 jumlah_kemunculan[i], jumlah_kemunculan[j] = jumlah_kemunculan[j], jumlah_kemunculan[i]
@@ -104,3 +110,4 @@ def sort_by_frequency(Arr):
             elif jumlah_kemunculan[i] == jumlah_kemunculan[j] and Arr[i] > Arr[j]:
                 jumlah_kemunculan[i], jumlah_kemunculan[j] = jumlah_kemunculan[j], jumlah_kemunculan[i]
                 Arr[i], Arr[j] = Arr[j], Arr[i]
+    return Arr
