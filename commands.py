@@ -67,7 +67,7 @@ def login():
 def logout():
     # User belum melakukan login sebelumnya
     if currentusers[0] == -1:
-        print("Login gagal!")
+        print("Logout gagal!")
         print("Anda belum login, silahkan login terlebih dahulu sebelum melakukan logout")
         return None
     # User sudah melakukan login sebelumnya
