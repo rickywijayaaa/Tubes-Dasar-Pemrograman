@@ -82,19 +82,29 @@ def my_append(Arr, item):
     return Arr
 
 # Fungsi Bantuan 7
+# Mengubah integer menjadi string dengan bentuk sudah menjadi standar rupiah
 def format_rupiah(integer):
+    # Inisialisasi awal
     string = str(integer)[::-1]
     digit_count = Length(string)
     result = ''
+    
+    # Perulangan dengan range sesuai panjang string
     for i in range(digit_count):
         result = string[i] + result
+        
+        # Percabangan dalam perulangan
         if (i + 1) % 3 == 0 and i != digit_count - 1:
             result = '.' + result
+    # Penambahan string 'Rp' pada result string yang didapat
     result = 'Rp ' + result
     return result
 
 # Fungsi Bantuan 8
+# Melakukan sorting berdasarkan frekuensi kemunculan item 
+# sekaligus membandingkan leksikografis untuk item yang memiliki jumlah frekuensi yang sama
 def sort_by_frequency(Arr):
+    # Inisialisasi array jumlah kemunculan yang dihitung
     jumlah_kemunculan = []
     for i in range(Length(Arr)):
         count = 0
